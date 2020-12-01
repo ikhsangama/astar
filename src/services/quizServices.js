@@ -3,22 +3,22 @@ export const fetchQuizes = () => {
     {
       type: "draggable",
       question: "Pindahkan angka dengan urutan terkecil hingga terbesar",
-      asset: [
+      assets: [
         {
           value: 3,
-          image: "url"
+          image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/3.jpg"
         },
         {
           value: 6,
-          image: "url"
+          image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/6.jpg"
         },
         {
           value: 7,
-          image: "url"
+          image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/7.jpg"
         },
         {
           value: 9,
-          image: "url"
+          image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/9.jpg"
         }
       ],
       answer: "3679"
@@ -39,7 +39,13 @@ export const fetchQuizes = () => {
       type: "short-response",
       question: "Berapa banyak jumlah bebek?",
       assets: "url",
-      answer: 32
+      answer: "32"
+    },
+    {
+      type: "short-response",
+      question: "Ibukota Indonesia adalah?",
+      assets: null,
+      answer: "Jakarta"
     },
   ]
 }
