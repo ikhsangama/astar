@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { DraggableQuizComponent, QuestionComponent } from "../components";
+import {
+  AnswerButtonComponent,
+  DraggableQuizComponent,
+  QuestionComponent,
+} from "../components";
 //
 import { fetchQuizes } from "../services/quizServices";
 
 export default function QuizPage() {
   const [quizes, setQuizes] = useState();
   const [quiz, setQuiz] = useState();
+  const [yourAnswer, setYourAnswer] = useState();
+  const [score, setScore] = useState();
 
   useEffect(() => {
     let getQuizesFromServices = fetchQuizes();
@@ -54,7 +60,7 @@ export default function QuizPage() {
       case "draggable":
         return (
           <>
-            <DraggableQuizComponent quiz={quiz} />
+            <DraggableQuizComponent quiz={quiz} setYourAnswer={setYourAnswer} />
           </>
         );
         break;
@@ -64,12 +70,18 @@ export default function QuizPage() {
     }
   };
 
+  const onNext = () => {
+    // console.log("nextButton");
+    // if()
+  };
+
   // Quiz Page
   return (
     <>
-      {JSON.stringify(quiz?.type)}
+      {/* {JSON.stringify(quiz?.type)} */}
       {/* <QuestionComponent question={quiz?.question} /> */}
       {renderByQuizType(quiz?.type)}
+      <AnswerButtonComponent onNext={onNext} />
     </>
   );
 }

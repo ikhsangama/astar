@@ -2,15 +2,16 @@ import React, { useState } from "react";
 
 //
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import AnswerButtonComponent from "./AnswerButtonComponent";
 import DragAndDropComponent from "./DragAndDropComponent";
 //
 
-export default function DraggableQuizComponent({ quiz }) {
+export default function DraggableQuizComponent({ quiz, setYourAnswer }) {
   const [unorderImages, setUnorderImages] = useState(quiz.assets);
 
   const onDragEnd = (result) => {
     const { source, destination, draggableId } = result;
-    console.log({ source, destination, draggableId });
+    // console.log({ source, destination, draggableId });
     // exit if it's out of the draggable area
     if (!destination) {
       return;
@@ -30,12 +31,24 @@ export default function DraggableQuizComponent({ quiz }) {
     copyUnorderImages.splice(destination.index, 0, unorderImages[source.index]);
     // update state
     setUnorderImages(copyUnorderImages);
+    const answer = getAnswer(copyUnorderImages);
+    // set the answer
+    setYourAnswer(answer);
+  };
+
+  /**
+   * get answer after drag and drop
+   * @param {Array} answerImages
+   */
+  const getAnswer = (answerImages) => {
+    let answerList = answerImages.map((image) => image.value);
+    return answerList;
   };
 
   return (
     <>
-      {JSON.stringify(quiz)}
-      <h5>{quiz.question}</h5>
+      {/* {JSON.stringify(quiz)} */}
+      <h1>{quiz.question}</h1>
       <div>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable" direction="horizontal">
