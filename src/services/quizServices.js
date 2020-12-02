@@ -1,13 +1,12 @@
+/**
+ * Assuming fetchQuizes is to fetch quizes from certain APIs
+ */
 export const fetchQuizes = () => {
   return [
     {
       type: "draggable",
       question: "Pindahkan angka dengan urutan terkecil hingga terbesar",
       assets: [
-        {
-          value: 3,
-          image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/3.jpg"
-        },
         {
           value: 6,
           image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/6.jpg"
@@ -19,7 +18,11 @@ export const fetchQuizes = () => {
         {
           value: 9,
           image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/9.jpg"
-        }
+        },
+        {
+          value: 3,
+          image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/3.jpg"
+        },
       ],
       answer: "3679"
     },
