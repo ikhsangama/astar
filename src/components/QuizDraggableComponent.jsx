@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-
+import { Stack, Text } from "@chakra-ui/react";
 //
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import AnswerButtonComponent from "./AnswerButtonComponent";
-import DragAndDropComponent from "./DragAndDropComponent";
+import { DragAndDropComponent } from "./index";
 //
 
 export default function DraggableQuizComponent({ quiz, setYourAnswer }) {
-  const [unorderImages, setUnorderImages] = useState(quiz.assets);
+  const [unorderImages, setUnorderImages] = useState(quiz.answer.assets);
 
   const onDragEnd = (result) => {
     const { source, destination, draggableId } = result;
@@ -47,28 +46,29 @@ export default function DraggableQuizComponent({ quiz, setYourAnswer }) {
 
   return (
     <>
-      {/* {JSON.stringify(quiz)} */}
-      <h1>{quiz.question}</h1>
-      <div>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="droppable" direction="horizontal">
-            {(provided) => (
-              <div ref={provided.innerRef} {...provided.droppableProps}>
-                {unorderImages.map((asset, index) => {
-                  return (
-                    <DragAndDropComponent
-                      asset={asset}
-                      index={index}
-                      key={index}
-                    />
-                  );
-                })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </div>
+      <Stack spacing="10" align="center">
+        <Text fontSize="xl">{quiz.question.text}</Text>
+        <div>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="droppable" direction="horizontal">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {unorderImages.map((asset, index) => {
+                    return (
+                      <DragAndDropComponent
+                        asset={asset}
+                        index={index}
+                        key={index}
+                      />
+                    );
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
+      </Stack>
     </>
   );
 }

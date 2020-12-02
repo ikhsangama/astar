@@ -1,43 +1,84 @@
 /**
- * Assuming fetchQuizes is to fetch quizes from certain APIs
+ * Assuming fetchQuizes is to fetch quizes from certain backend APIs
+ * type can be assumed as "ID_TYPE" that map to unique form of question
  */
 export const fetchQuizes = () => {
   return [
+    // {
+    //   _id: 1,
+    //   question: {
+    //     text: "Pindahkan angka dengan urutan terkecil hingga terbesar",
+    //     type: null,
+    //     assets: null,
+    //   },
+    //   answer: {
+    //     type: "draggable",
+    //     assets: [
+    //       {
+    //         value: 6,
+    //         image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/6.jpg"
+    //       },
+    //       {
+    //         value: 7,
+    //         image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/7.jpg"
+    //       },
+    //       {
+    //         value: 9,
+    //         image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/9.jpg"
+    //       },
+    //       {
+    //         value: 3,
+    //         image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/3.jpg"
+    //       },
+    //     ],
+    //     value: [3, 6, 7, 9]
+    //   },
+    // },
+    // {
+    //   _id: 2,
+    //   question: {
+    //     text: "Apakah ada 10 kaus kaki di bawah ini?",
+    //     type: "counting",
+    //     count: 9,
+    //     assets: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/3.jpg"
+    //   },
+    //   answer: {
+    //     type: "singleCorrectOptions",
+    //     assets: null,
+    //     value: "no"
+    //   }
+    // },
     {
-      type: "draggable",
-      question: "Pindahkan angka dengan urutan terkecil hingga terbesar",
-      assets: [
-        {
-          value: 6,
-          image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/6.jpg"
-        },
-        {
-          value: 7,
-          image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/7.jpg"
-        },
-        {
-          value: 9,
-          image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/9.jpg"
-        },
-        {
-          value: 3,
-          image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/3.jpg"
-        },
-      ],
-      answer: [3, 6, 7, 9]
+      _id: 3,
+      type: "multipleCorrectOptions",
+      question: {
+        text: "Manakah gambar yang mempresentasikan angka 'dua' dan 'empat'?",
+        type: null,
+        assets: null,
+      },
+      answer: {
+        type: "multipleCorrectOptions",
+        assets: [
+          {
+            value: 1,
+            image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/1.jpg"
+          },
+          {
+            value: 2,
+            image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/2.jpg"
+          },
+          {
+            value: 3,
+            image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/3.jpg"
+          },
+          {
+            value: 4,
+            image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/4.jpg"
+          },
+        ],
+        value: [2, 4]
+      }
     },
-    // {
-    //   type: "single-correct-options",
-    //   question: "Apakah ada 10 kaus kaki di bawah ini?",
-    //   asset: "url",
-    //   answer: "no"
-    // },
-    // {
-    //   type: "multiple-correct-options",
-    //   question: "Manakah gambar yang mempresentasikan 'dua'?",
-    //   assets: ['url1', 'url2', 'url3'],
-    //   answer: [0, 3]
-    // },
     // {
     //   type: "short-response",
     //   question: "Berapa banyak jumlah bebek?",
