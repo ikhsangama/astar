@@ -19,6 +19,11 @@ export default function QuizPage() {
     }
   }, [quizes]);
 
+  /**
+   *
+   * @param {Array} array
+   * return shuffled array
+   */
   function shuffle(array) {
     var currentIndex = array.length,
       temporaryValue,
@@ -39,6 +44,11 @@ export default function QuizPage() {
     return array;
   }
 
+  /**
+   *
+   * @param {String} quizType
+   * return quiz component based on quiz type
+   */
   const renderByQuizType = (quizType) => {
     switch (quizType) {
       case "draggable":
