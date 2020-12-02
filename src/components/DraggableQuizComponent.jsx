@@ -25,11 +25,9 @@ export default function DraggableQuizComponent({ quiz }) {
 
     // copying
     const copyUnorderImages = Array.from(unorderImages);
-    // swapping
-    [copyUnorderImages[source.index], copyUnorderImages[destination.index]] = [
-      copyUnorderImages[destination.index],
-      copyUnorderImages[source.index],
-    ];
+    // splice and insert to destination index
+    copyUnorderImages.splice(source.index, 1);
+    copyUnorderImages.splice(destination.index, 0, unorderImages[source.index]);
     // update state
     setUnorderImages(copyUnorderImages);
   };
