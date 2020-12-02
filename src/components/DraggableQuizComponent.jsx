@@ -9,12 +9,13 @@ export default function DraggableQuizComponent({ quiz }) {
   const [unorderImages, setUnorderImages] = useState(quiz.assets);
 
   const onDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
-    // console.log({ destination, source, draggableId });
+    const { source, destination, draggableId } = result;
+    console.log({ source, destination, draggableId });
+    // exit if it's out of the draggable area
     if (!destination) {
       return;
     }
-
+    // exit if it's same position
     if (
       destination.droppableId == source.droppableId &&
       destination.index == source.index
@@ -23,36 +24,14 @@ export default function DraggableQuizComponent({ quiz }) {
     }
 
     // copying
-    const newOrderAssets = Array.from(quiz.assets);
-    console.log(newOrderAssets, draggableId, "<<< neworder");
-    newOrderAssets.splice(source.index, 1);
-    newOrderAssets.splice(source.index, 0, draggableId);
-
-    const newColumn = {
-      ...newOrderAssets,
-    };
-    // setUnorderImages([
-    //   {
-    //     value: 3,
-    //     image:
-    //       "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/3.jpg",
-    //   },
-    //   {
-    //     value: 6,
-    //     image:
-    //       "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/6.jpg",
-    //   },
-    //   {
-    //     value: 7,
-    //     image:
-    //       "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/7.jpg",
-    //   },
-    //   {
-    //     value: 9,
-    //     image:
-    //       "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/9.jpg",
-    //   },
-    // ]);
+    const copyUnorderImages = Array.from(unorderImages);
+    // swapping
+    [copyUnorderImages[source.index], copyUnorderImages[destination.index]] = [
+      copyUnorderImages[destination.index],
+      copyUnorderImages[source.index],
+    ];
+    // update state
+    setUnorderImages(copyUnorderImages);
   };
 
   return (
