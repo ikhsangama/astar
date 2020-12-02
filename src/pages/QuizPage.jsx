@@ -57,6 +57,7 @@ export default function QuizPage() {
   // Quiz Page
   return (
     <>
+      {JSON.stringify(quiz?.type)}
       {/* <QuestionComponent question={quiz?.question} /> */}
       {renderByQuizType(quiz?.type)}
     </>
