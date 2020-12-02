@@ -24,7 +24,7 @@ export const fetchQuizes = () => {
           image: "https://storage.googleapis.com/ikhsangama-gallery/AStar-Test/3.jpg"
         },
       ],
-      answer: "3679"
+      answer: [3, 6, 7, 9]
     },
     {
       type: "single-correct-options",
