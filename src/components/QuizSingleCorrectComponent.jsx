@@ -5,8 +5,8 @@ import { Stack, Text, Box, RadioGroup, Radio } from "@chakra-ui/react";
 export default function SingleCorrectQuizComponent({ quiz, setYourAnswer }) {
   // if they dont have assets image, no need to use quizImage
   // const [quizImage, setQuizImage] = useState(quiz.assets?.image);
-  const onAnswer = (e) => {
-    setYourAnswer(e);
+  const onAnswer = (event) => {
+    setYourAnswer(event);
   };
   return (
     <>

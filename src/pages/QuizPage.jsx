@@ -5,6 +5,7 @@ import {
   // QuestionComponent,
   QuizDraggableComponent,
   QuizSingleCorrectComponent,
+  QuizMultipleCorrectComponent,
 } from "../components";
 
 import { Container, Center, Text } from "@chakra-ui/react";
@@ -93,7 +94,7 @@ export default function QuizPage() {
         return (
           <>
             <QuizSingleCorrectComponent
-              // quiz={quiz}
+              quiz={quiz}
               setYourAnswer={setYourAnswer}
             />
           </>
@@ -102,7 +103,7 @@ export default function QuizPage() {
         return (
           <>
             <QuizMultipleCorrectComponent
-              // quiz={quiz}
+              quiz={quiz}
               setYourAnswer={setYourAnswer}
             />
           </>
@@ -118,7 +119,7 @@ export default function QuizPage() {
   const onNext = () => {
     scoring();
     // go to next quiz
-    console.log(quizNumber);
+    // console.log(quizNumber);
     setQuizNumber(quizNumber + 1);
   };
 
@@ -140,8 +141,8 @@ export default function QuizPage() {
         return JSON.stringify(quiz.answer.value) === JSON.stringify(yourAnswer);
       case "singleCorrectOptions":
         return quiz.answer.value === yourAnswer;
-      // case "counting-singleCorrectOptions":
-      //   return quiz.answer === yourAnswer;
+      case "multipleCorrectOptions":
+        return JSON.stringify(quiz.answer.value) === JSON.stringify(yourAnswer);
       default:
         return false;
     }
