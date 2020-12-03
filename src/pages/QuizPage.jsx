@@ -153,6 +153,11 @@ export default function QuizPage() {
         return quiz.answer.value === yourAnswer;
       case "multipleCorrectOptions":
         return JSON.stringify(quiz.answer.value) === JSON.stringify(yourAnswer);
+      case "shortResponse":
+        return (
+          String(quiz.answer.value).toLowerCase() ===
+          String(yourAnswer.toLowerCase())
+        );
       default:
         return false;
     }
