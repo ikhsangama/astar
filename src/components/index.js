@@ -7,6 +7,6 @@ export { default as QuizShortResponseComponent } from "./QuizShortResponseCompon
 export { default as OneImageComponent } from "./OneImageComponent"
 export { default as CountingImageComponent } from "./CountingImageComponent"
 export { default as DragAndDropComponent } from "./DragAndDropComponent"
-export { default as AnswerButtonComponent } from "./AnswerButtonComponent"
 export { default as ScoreBannerComponent } from "./ScoreBannerComponent"
 export { default as ScoreIndicatorComponent } from "./ScoreIndicatorComponent"
+export { default as FinishComponent } from "./FinishComponent"

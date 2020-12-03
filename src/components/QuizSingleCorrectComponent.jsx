@@ -23,8 +23,8 @@ export default function SingleCorrectQuizComponent({ quiz, setYourAnswer }) {
           <Stack direction="row">
             <SimpleGrid columns={2} spacingX="40px" spacingY="20px">
               {/* if there is an image asset, load it */}
-              {quiz.answer.assets.map((asset) => (
-                <Radio value={asset.value}>
+              {quiz.answer.assets.map((asset, index) => (
+                <Radio value={asset.value} key={index}>
                   {asset.image ? (
                     <Image src={asset.image} alt={asset.value} maxH={40} />
                   ) : (

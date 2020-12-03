@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input, NumberInput, NumberInputField } from "@chakra-ui/react";
 
-export default function QuizShortResponseComponent({ quiz, setYourAnswer }) {
+export default function QuizShortResponseComponent({
+  quiz,
+  setYourAnswer,
+  yourAnswer,
+}) {
   /**
    * Update yourAnswer state
    * @param {*} event
@@ -22,12 +26,21 @@ export default function QuizShortResponseComponent({ quiz, setYourAnswer }) {
           keepWithinRange={true}
           clampValueOnBlur={true}
         >
-          <NumberInputField placeholder="0-999" onChange={(e) => onTyping(e)} />
+          <NumberInputField
+            placeholder="0-999"
+            onChange={(e) => onTyping(e)}
+            value={yourAnswer || null}
+          />
         </NumberInput>
       );
     }
     return (
-      <Input onChange={(e) => onTyping(e)} placeholder="Jawab.." maxW={80} />
+      <Input
+        onChange={(e) => onTyping(e)}
+        placeholder="Jawab.."
+        maxW={80}
+        value={yourAnswer || ""}
+      />
     );
   };
   return <>{renderByAnswerType()}</>;

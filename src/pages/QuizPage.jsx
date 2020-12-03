@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
-  AnswerButtonComponent,
   CountingImageComponent,
   OneImageComponent,
-  // QuestionComponent,
   QuizDraggableComponent,
   QuizSingleCorrectComponent,
   QuizMultipleCorrectComponent,
   QuizShortResponseComponent,
   ScoreBannerComponent,
+  FinishComponent,
 } from "../components";
 
-import { Container, Center, Text, VStack } from "@chakra-ui/react";
+import { Container, Heading, VStack, Button } from "@chakra-ui/react";
 //
 import { fetchQuizes } from "../services/quizServices";
 
@@ -19,20 +18,20 @@ export default function QuizPage() {
   const [quizes, setQuizes] = useState();
   const [quiz, setQuiz] = useState();
   const [yourAnswer, setYourAnswer] = useState();
-  const [track, setTrack] = useState([]);
-  const [quizNumber, setQuizNumber] = useState(0);
+  const [track, setTrack] = useState();
+  const [quizNumber, setQuizNumber] = useState();
   const [isFinished, setIsFinished] = useState(false);
 
   // first time render
   useEffect(() => {
-    let getQuizesFromServices = fetchQuizes();
-    let getRandomQuizOrder = shuffle(getQuizesFromServices);
-    setQuizes(getRandomQuizOrder);
+    // make it as separated function because used on first play and reset button
+    start();
   }, []);
 
   // set quiz after fetch
   useEffect(() => {
     if (quizes) {
+      setQuizNumber(0);
       setQuiz(quizes[quizNumber]);
       setTrack(new Array(quizes.length).fill(null));
     }
@@ -68,6 +67,20 @@ export default function QuizPage() {
     return array;
   }
 
+  /**
+   * to first time render and reset button
+   */
+  const start = () => {
+    let getQuizesFromServices = fetchQuizes();
+    let getRandomQuizOrder = shuffle(getQuizesFromServices);
+    setQuizes(getRandomQuizOrder);
+    setIsFinished(false);
+  };
+
+  /**
+   * Render by question asset
+   * @param {String} type
+   */
   const renderQuestionType = (type) => {
     switch (type) {
       case "counting":
@@ -124,6 +137,7 @@ export default function QuizPage() {
             <QuizShortResponseComponent
               quiz={quiz}
               setYourAnswer={setYourAnswer}
+              yourAnswer={yourAnswer}
             />
           </>
         );
@@ -138,6 +152,7 @@ export default function QuizPage() {
   const onNext = () => {
     tracking();
     // go to next quiz
+    setYourAnswer(undefined);
     if (quizNumber < quizes.length - 1) {
       setQuizNumber(quizNumber + 1);
     } else {
@@ -169,7 +184,7 @@ export default function QuizPage() {
       case "shortResponse":
         return (
           String(quiz.answer.value).toLowerCase() ===
-          String(yourAnswer.toLowerCase())
+          String(yourAnswer).toLowerCase()
         );
       default:
         return false;
@@ -177,33 +192,44 @@ export default function QuizPage() {
   };
 
   /**
-   *
+   * if isFinished === true, render result component
    */
   const renderResult = () => {
-    return (
-      <>
-        <h1>Finishhh</h1>
-      </>
-    );
+    return <FinishComponent track={track} />;
   };
+
   // Quiz Page
   return (
     <>
       <ScoreBannerComponent track={track} />
-      {JSON.stringify([isFinished, "<< quiz"])}
-      {JSON.stringify(quiz?.answer?.type)}
+      {/* {JSON.stringify(quiz?.answer?.type)} */}
       {JSON.stringify(yourAnswer)}
-      {JSON.stringify(track)}
+      {/* {JSON.stringify(track)} */}
       <Container maxW="xl" centerContent>
         {isFinished ? (
-          renderResult()
+          // finished
+          <>
+            {renderResult()}
+            <Button bgColor="cyan.600" marginTop="20px" onClick={() => start()}>
+              Reset
+            </Button>
+          </>
         ) : (
-          <VStack spacing={10}>
-            <Text fontSize="xl"> {quiz?.question.text} </Text>
-            {renderQuestionType(quiz?.question?.type)}
-            {renderAnswerType(quiz?.answer?.type)}
-            <AnswerButtonComponent onNext={onNext} />
-          </VStack>
+          // not finish
+          <>
+            <VStack spacing={10} height="60vh">
+              <Heading fontSize="2xl"> {quiz?.question.text} </Heading>
+              {renderQuestionType(quiz?.question?.type)}
+              {renderAnswerType(quiz?.answer?.type)}
+            </VStack>
+            <Button
+              colorScheme="blue"
+              marginTop="20px"
+              onClick={() => onNext()}
+            >
+              Lanjut
+            </Button>
+          </>
         )}
       </Container>
     </>
