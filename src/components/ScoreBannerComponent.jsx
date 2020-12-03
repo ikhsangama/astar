@@ -12,11 +12,15 @@ export default function ScoreBannerComponent({ track }) {
     return;
   };
   return (
-    <Box bg="blue.600" w="100%" p={4} color="white">
+    <Box bg="blue.600" w="100%" p={4} color="white" mb={10}>
       <Center>
         <HStack>
           {track.map((el, index) => (
-            <ScoreIndicatorComponent boxSize={8} color={giveColor(el)} />
+            <ScoreIndicatorComponent
+              boxSize={8}
+              color={giveColor(el)}
+              key={index}
+            />
           ))}
         </HStack>
       </Center>

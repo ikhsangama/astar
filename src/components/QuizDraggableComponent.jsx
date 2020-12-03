@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stack, Text } from "@chakra-ui/react";
 //
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -7,6 +7,10 @@ import { DragAndDropComponent } from "./index";
 
 export default function DraggableQuizComponent({ quiz, setYourAnswer }) {
   const [unorderImages, setUnorderImages] = useState(quiz.answer.assets);
+
+  useEffect(() => {
+    setUnorderImages(quiz.answer.assets);
+  }, [quiz]);
 
   const onDragEnd = (result) => {
     const { source, destination, draggableId } = result;

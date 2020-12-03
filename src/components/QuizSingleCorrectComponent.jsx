@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Stack, Text, Box, RadioGroup, Radio } from "@chakra-ui/react";
+import {
+  Stack,
+  Text,
+  Box,
+  RadioGroup,
+  Radio,
+  Image,
+  SimpleGrid,
+} from "@chakra-ui/react";
 // import "./QuizSingleCorrectComponent.css";
 
 export default function SingleCorrectQuizComponent({ quiz, setYourAnswer }) {
@@ -13,8 +21,18 @@ export default function SingleCorrectQuizComponent({ quiz, setYourAnswer }) {
       <Stack spacing="10" align="center">
         <RadioGroup onChange={(e) => onAnswer(e)}>
           <Stack direction="row">
-            <Radio value="yes">Yes</Radio>
-            <Radio value="no">No</Radio>
+            <SimpleGrid columns={2} spacingX="40px" spacingY="20px">
+              {/* if there is an image asset, load it */}
+              {quiz.answer.assets.map((asset) => (
+                <Radio value={asset.value}>
+                  {asset.image ? (
+                    <Image src={asset.image} alt={asset.value} maxH={40} />
+                  ) : (
+                    asset.value
+                  )}
+                </Radio>
+              ))}
+            </SimpleGrid>
           </Stack>
         </RadioGroup>
       </Stack>
