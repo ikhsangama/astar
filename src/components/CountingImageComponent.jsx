@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function CountingImageComponent({ quiz }) {
   // if dont have assets image, no need to use quizImage
-  const [quizImage, setQuizImage] = useState(quiz.question.assets);
+  // const [quizImage, setQuizImage] = useState(quiz.question.assets);
   return (
     <>
       {
@@ -12,7 +12,7 @@ export default function CountingImageComponent({ quiz }) {
             {[...Array(quiz.question.count)].map((e, index) => {
               return (
                 <img
-                  src={quizImage}
+                  src={quiz.question.assets}
                   key={index}
                   style={{
                     display: "inline-block",

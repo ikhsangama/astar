@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import {
   AnswerButtonComponent,
   CountingImageComponent,
+  OneImageComponent,
   // QuestionComponent,
   QuizDraggableComponent,
   QuizSingleCorrectComponent,
   QuizMultipleCorrectComponent,
   QuizShortResponseComponent,
+  ScoreBannerComponent,
 } from "../components";
 
 import { Container, Center, Text, VStack } from "@chakra-ui/react";
@@ -17,8 +19,9 @@ export default function QuizPage() {
   const [quizes, setQuizes] = useState();
   const [quiz, setQuiz] = useState();
   const [yourAnswer, setYourAnswer] = useState();
-  const [score, setScore] = useState(0);
+  const [track, setTrack] = useState([]);
   const [quizNumber, setQuizNumber] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
 
   // first time render
   useEffect(() => {
@@ -31,6 +34,7 @@ export default function QuizPage() {
   useEffect(() => {
     if (quizes) {
       setQuiz(quizes[quizNumber]);
+      setTrack(new Array(quizes.length).fill(null));
     }
   }, [quizes]);
 
@@ -72,7 +76,12 @@ export default function QuizPage() {
             <CountingImageComponent quiz={quiz} />
           </>
         );
-
+      case "image":
+        return (
+          <>
+            <OneImageComponent quiz={quiz} />
+          </>
+        );
       default:
         break;
     }
@@ -127,19 +136,23 @@ export default function QuizPage() {
    * go to the next question
    */
   const onNext = () => {
-    scoring();
+    tracking();
     // go to next quiz
-    // console.log(quizNumber);
-    setQuizNumber(quizNumber + 1);
+    if (quizNumber < quizes.length - 1) {
+      setQuizNumber(quizNumber + 1);
+    } else {
+      // if finish
+      setIsFinished(true);
+    }
   };
 
   /**
-   *  if answer is true, give score + 10
+   *  tracking either answer right or wrong
    */
-  const scoring = () => {
-    if (checkAnswer()) {
-      setScore(score + 10);
-    }
+  const tracking = () => {
+    let items = [...track];
+    items[quizNumber] = checkAnswer();
+    setTrack(items);
   };
 
   /**
@@ -163,19 +176,35 @@ export default function QuizPage() {
     }
   };
 
+  /**
+   *
+   */
+  const renderResult = () => {
+    return (
+      <>
+        <h1>Finishhh</h1>
+      </>
+    );
+  };
   // Quiz Page
   return (
     <>
+      <ScoreBannerComponent track={track} />
+      {JSON.stringify([isFinished, "<< quiz"])}
       {JSON.stringify(quiz?.answer?.type)}
       {JSON.stringify(yourAnswer)}
-      {JSON.stringify(score)}
+      {JSON.stringify(track)}
       <Container maxW="xl" centerContent>
-        <VStack spacing={10}>
-          <Text fontSize="xl"> {quiz?.question.text} </Text>
-          {renderQuestionType(quiz?.question?.type)}
-          {renderAnswerType(quiz?.answer?.type)}
-          <AnswerButtonComponent onNext={onNext} />
-        </VStack>
+        {isFinished ? (
+          renderResult()
+        ) : (
+          <VStack spacing={10}>
+            <Text fontSize="xl"> {quiz?.question.text} </Text>
+            {renderQuestionType(quiz?.question?.type)}
+            {renderAnswerType(quiz?.answer?.type)}
+            <AnswerButtonComponent onNext={onNext} />
+          </VStack>
+        )}
       </Container>
     </>
   );

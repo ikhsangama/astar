@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Input,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-} from "@chakra-ui/react";
+import { Input, NumberInput, NumberInputField } from "@chakra-ui/react";
 
 export default function QuizShortResponseComponent({ quiz, setYourAnswer }) {
   /**
@@ -18,10 +11,9 @@ export default function QuizShortResponseComponent({ quiz, setYourAnswer }) {
   };
 
   /**
-   *
+   * Render input box based on answer type
    */
   const renderByAnswerType = () => {
-    console.log(typeof quiz.answer.value == "number");
     if (typeof quiz.answer.value == "number") {
       return (
         <NumberInput
@@ -38,10 +30,5 @@ export default function QuizShortResponseComponent({ quiz, setYourAnswer }) {
       <Input onChange={(e) => onTyping(e)} placeholder="Jawab.." maxW={80} />
     );
   };
-  return (
-    <>
-      {quiz.answer.value}
-      {renderByAnswerType()}
-    </>
-  );
+  return <>{renderByAnswerType()}</>;
 }
