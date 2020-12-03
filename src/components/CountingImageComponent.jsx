@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 export default function CountingImageComponent({ quiz }) {
-  // if they dont have assets image, no need to use quizImage
-  console.log(quiz.question.count, "<> quiz");
+  // if dont have assets image, no need to use quizImage
   const [quizImage, setQuizImage] = useState(quiz.question.assets);
   return (
     <>

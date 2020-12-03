@@ -47,7 +47,6 @@ export default function DraggableQuizComponent({ quiz, setYourAnswer }) {
   return (
     <>
       <Stack spacing="10" align="center">
-        <Text fontSize="xl">{quiz.question.text}</Text>
         <div>
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="droppable" direction="horizontal">

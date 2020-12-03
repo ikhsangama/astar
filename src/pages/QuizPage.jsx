@@ -6,9 +6,10 @@ import {
   QuizDraggableComponent,
   QuizSingleCorrectComponent,
   QuizMultipleCorrectComponent,
+  QuizShortResponseComponent,
 } from "../components";
 
-import { Container, Center, Text } from "@chakra-ui/react";
+import { Container, Center, Text, VStack } from "@chakra-ui/react";
 //
 import { fetchQuizes } from "../services/quizServices";
 
@@ -108,6 +109,15 @@ export default function QuizPage() {
             />
           </>
         );
+      case "shortResponse":
+        return (
+          <>
+            <QuizShortResponseComponent
+              quiz={quiz}
+              setYourAnswer={setYourAnswer}
+            />
+          </>
+        );
       default:
         break;
     }
@@ -155,10 +165,12 @@ export default function QuizPage() {
       {JSON.stringify(yourAnswer)}
       {JSON.stringify(score)}
       <Container maxW="xl" centerContent>
-        <Text> {quiz?.question.text} </Text>
-        {renderQuestionType(quiz?.question?.type)}
-        {renderAnswerType(quiz?.answer?.type)}
-        <AnswerButtonComponent onNext={onNext} />
+        <VStack spacing={10}>
+          <Text fontSize="xl"> {quiz?.question.text} </Text>
+          {renderQuestionType(quiz?.question?.type)}
+          {renderAnswerType(quiz?.answer?.type)}
+          <AnswerButtonComponent onNext={onNext} />
+        </VStack>
       </Container>
     </>
   );
