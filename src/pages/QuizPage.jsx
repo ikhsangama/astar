@@ -202,9 +202,6 @@ export default function QuizPage() {
   return (
     <>
       <ScoreBannerComponent track={track} />
-      {/* {JSON.stringify(quiz?.answer?.type)} */}
-      {JSON.stringify(yourAnswer)}
-      {/* {JSON.stringify(track)} */}
       <Container maxW="xl" centerContent>
         {isFinished ? (
           // finished

@@ -13,7 +13,6 @@ export default function FinishComponent({ track }) {
     const fullColor = 1000;
     let color = percentage * fullColor - 100;
     if (percentage == 0.1) color = 100;
-    // console.log(color);
     return `green.${color}`;
   };
 

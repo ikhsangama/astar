@@ -14,7 +14,6 @@ export default function DraggableQuizComponent({ quiz, setYourAnswer }) {
 
   const onDragEnd = (result) => {
     const { source, destination, draggableId } = result;
-    // console.log({ source, destination, draggableId });
     // exit if it's out of the draggable area
     if (!destination) {
       return;
