@@ -7,7 +7,7 @@ export default function FinishComponent({ track }) {
   const percentage = totalTrue / totalQuiz;
 
   /**
-   * color weight based on chakra default theme
+   * give color custom based on score, color weight from chakra default theme
    */
   const giveGreenColor = () => {
     const fullColor = 1000;
