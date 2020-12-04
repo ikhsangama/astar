@@ -214,18 +214,18 @@ export default function QuizPage() {
         ) : (
           // not finish
           <>
-            <VStack spacing={10} height="60vh">
+            <VStack spacing={10}>
               <Heading fontSize="2xl"> {quiz?.question.text} </Heading>
               {renderQuestionType(quiz?.question?.type)}
               {renderAnswerType(quiz?.answer?.type)}
+              <Button
+                colorScheme="blue"
+                marginTop="20px"
+                onClick={() => onNext()}
+              >
+                Lanjut
+              </Button>
             </VStack>
-            <Button
-              colorScheme="blue"
-              marginTop="20px"
-              onClick={() => onNext()}
-            >
-              Lanjut
-            </Button>
           </>
         )}
       </Container>
